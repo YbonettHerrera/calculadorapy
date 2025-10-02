@@ -10,13 +10,13 @@ def mostrar_menu():
     print("-"*30)
 
 def obtener_numeros():
-    """Obtiene dos números del usuario"""
+    """Se obtienen dos números del usuario"""
     try:
-        num1 = float(input("Ingresa el primer número: "))
-        num2 = float(input("Ingresa el segundo número: "))
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
         return num1, num2
     except ValueError:
-        print("❌ Error: Por favor ingresa números válidos")
+        print(" Error: Por favor ingresa números válidos")
         return None, None
 
 def sumar(a, b):
@@ -30,7 +30,7 @@ def multiplicar(a, b):
 
 def dividir(a, b):
     if b == 0:
-        return "❌ Error: No se puede dividir por cero"
+        return " Error: No se puede dividir por cero"
     return a / b
 
 def main():
@@ -43,14 +43,14 @@ def main():
             opcion = input("Selecciona una opción (1-5): ")
             
             if opcion == "5":
-                print("\n¡Gracias por usar la calculadora! ")
+                print("\n¡Gracias por usar esta calculadora! ")
                 break
             
             if opcion not in ["1", "2", "3", "4"]:
-                print("❌ Opción no válida. Por favor selecciona 1-5.")
+                print(" Opción no válida. Por favor selecciona 1-5.")
                 continue
             
-            # Obtener números a operar
+            # Obtener números para realizar la operaración
             num1, num2 = obtener_numeros()
             if num1 is None or num2 is None:
                 continue
@@ -82,7 +82,7 @@ def main():
             print("\n\n¡Hasta luego! ")
             break
         except Exception as e:
-            print(f"❌ Error inesperado: {e}")
+            print(f" Error inesperado: {e}")
 
 if __name__ == "__main__":
     main()

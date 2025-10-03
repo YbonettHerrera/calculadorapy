@@ -6,7 +6,8 @@ def mostrar_menu():
     print("2. Restar")
     print("3. Multiplicar")
     print("4. Dividir")
-    print("5. Salir")
+    print("5. Elevar al cubo")
+    print("6. Salir")
     print("-"*30)
 
 def obtener_numeros():
@@ -18,6 +19,15 @@ def obtener_numeros():
     except ValueError:
         print(" Error: Por favor ingresa números válidos")
         return None, None
+
+def obtener_un_numero():
+    """Obtiene un número del usuario"""
+    try:
+        num = float(input("Ingrese el número: "))
+        return num
+    except ValueError:
+        print(" Error: Por favor ingresa números válidos")
+        return None
 
 def sumar(a, b):
     return a + b
@@ -33,6 +43,10 @@ def dividir(a, b):
         return " Error: No se puede dividir por cero"
     return a / b
 
+def elevar_al_cubo(a):
+    """Eleva un número al cubo (a la potencia 3)"""
+    return a ** 3
+
 def main():
     print("¡Bienvenido a la Calculadora! ")
     
@@ -40,39 +54,47 @@ def main():
         mostrar_menu()
         
         try:
-            opcion = input("Selecciona una opción (1-5): ")
+            opcion = input("Selecciona una opción (1-6): ")
             
-            if opcion == "5":
-                print("\n¡Gracias por usar esta calculadora! ")
+            if opcion == "6":
+                print("\n¡Gracias! ")
                 break
             
-            if opcion not in ["1", "2", "3", "4"]:
-                print(" Opción no válida. Por favor selecciona 1-5.")
+            if opcion not in ["1", "2", "3", "4", "5"]:
+                
                 continue
             
-            # Obtener números para realizar la operaración
-            num1, num2 = obtener_numeros()
-            if num1 is None or num2 is None:
-                continue
+            # Realizar operación
+            if opcion == "5":
+                # Para elevar al cubo solo se necesita un número
+                num = obtener_un_numero()
+                if num is None:
+                    continue
+                resultado = elevar_al_cubo(num)
+                print(f"\n Resultado: {num}³ = {resultado}")
+            else:
+                # Para las demás operaciones se necesitan dos números
+                num1, num2 = obtener_numeros()
+                if num1 is None or num2 is None:
+                    continue
+                
+                if opcion == "1":
+                    resultado = sumar(num1, num2)
+                    operacion = "+"
+                elif opcion == "2":
+                    resultado = restar(num1, num2)
+                    operacion = "-"
+                elif opcion == "3":
+                    resultado = multiplicar(num1, num2)
+                    operacion = "×"
+                elif opcion == "4":
+                    resultado = dividir(num1, num2)
+                    operacion = "÷"
+                
+                # Muesta el resultado
+                print(f"\n Resultado: {num1} {operacion} {num2} = {resultado}")
             
-            # Realiza la operación
-            if opcion == "1":
-                resultado = sumar(num1, num2)
-                operacion = "+"
-            elif opcion == "2":
-                resultado = restar(num1, num2)
-                operacion = "-"
-            elif opcion == "3":
-                resultado = multiplicar(num1, num2)
-                operacion = "×"
-            elif opcion == "4":
-                resultado = dividir(num1, num2)
-                operacion = "÷"
-            
-            # Muestra el resultado
-            print(f"\n Resultado: {num1} {operacion} {num2} = {resultado}")
-            
-            # Pregunta si quiere continuar con otra operación
+            # Preguntar si quiere continuar con otra operación
             continuar = input("\n¿Quieres hacer otra operación? (s/n): ").lower()
             if continuar != 's' and continuar != 'si':
                 print("\n¡Gracias! ")
